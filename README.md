@@ -4,3 +4,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ##  Sección 19: Formularios Reactivos - Múltiples selectores anidados
 
+## Documentación del API REST Countries usado
+[Ir a rest countries](https://restcountries.com/#api-endpoints-v2)
