@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { tap } from 'rxjs';
 
 import { PaisesService } from '../../services/paises.service';
-import { PaisSmall } from '../../interfaces/pais.interface';
+import { PaisSmall, Pais } from '../../interfaces/pais.interface';
 
 @Component({
   selector: 'app-selector-page',
@@ -17,6 +17,7 @@ export class SelectorPageComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
     region: ['', [Validators.required]],
     pais: ['', [Validators.required]],
+    frontera: ['', [Validators.required]],
   });
 
   regiones: string[] = [];
@@ -28,6 +29,7 @@ export class SelectorPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.regiones = this.paisesService.regiones;
+
     //* Cuando cambie la región
     this.miFormulario.get('region')?.valueChanges
       .pipe(
@@ -35,6 +37,18 @@ export class SelectorPageComponent implements OnInit {
         switchMap(region => this.paisesService.getPaisesPorRegion(region))
       )
       .subscribe((paises: PaisSmall[]) => this.paises = paises);
+
+    //* Cuando cambie el país
+    this.miFormulario.get('pais')?.valueChanges
+        .pipe(
+          tap(codigo => this.miFormulario.get('frontera')?.reset('')),
+          switchMap(codigo => this.paisesService.getPaisPorCodigo(codigo))
+        )
+        .subscribe((fronteras: Pais[]) => console.log(fronteras));
+
+
+    this.paisesService.getPaisPorCodigo('per')
+        .subscribe(valor => console.log(valor));
   }
 
   guardar(): void {

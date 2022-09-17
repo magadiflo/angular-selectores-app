@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 
-import { PaisSmall } from '../interfaces/pais.interface';
+import { Pais, PaisSmall } from '../interfaces/pais.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,16 @@ export class PaisesService {
   getPaisesPorRegion(region: string): Observable<PaisSmall[]> {
     const url = `${this._baseUrl}/region/${region}?fields=alpha3Code,name`;
     return this.http.get<PaisSmall[]>(url);
+  }
+
+  getPaisPorCodigo(codigo: string): Observable<Pais[]> {
+    if (!codigo) {
+      //* EMPTY, un Observable simple que no emite elementos al Observador e inmediatamente emite una notificación completa.
+      //* EMPTY, un Observable simple que solo emite la notificación completa. 
+      return EMPTY;
+    }
+    const url = `${this._baseUrl}/alpha/${codigo}`;
+    return this.http.get<Pais[]>(`${url}`);
   }
 
 }
