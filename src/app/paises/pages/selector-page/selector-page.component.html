@@ -4,8 +4,15 @@
     <div class="mb-3">
         <label for="region" class="form-label">Continente</label>
         <select id="region" formControlName="region" class="form-select">
-            <option value="">-Seleccionar-</option>
+            <option value="" selected>-Seleccionar-</option>
             <option *ngFor="let region of regiones" [value]="region | lowercase">{{ region }}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="pais" class="form-label">País</label>
+        <select id="pais" formControlName="pais" class="form-select">
+            <option value="" selected>-Seleccionar-</option>
+            <option *ngFor="let pais of paises" [value]="pais.alpha3Code">{{ pais.name }}</option>
         </select>
     </div>
     <div class="d-flex justify-content-end">
