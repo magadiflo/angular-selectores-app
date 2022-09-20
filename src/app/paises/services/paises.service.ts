@@ -28,14 +28,14 @@ export class PaisesService {
     return this.http.get<PaisSmall[]>(url);
   }
 
-  getPaisPorCodigo(codigo: string): Observable<Pais[]> {
+  getPaisPorCodigo(codigo: string): Observable<Pais> {
     if (!codigo) {
       //* EMPTY, un Observable simple que no emite elementos al Observador e inmediatamente emite una notificación completa.
       //* EMPTY, un Observable simple que solo emite la notificación completa. 
       return EMPTY;
     }
     const url = `${this._baseUrl}/alpha/${codigo}`;
-    return this.http.get<Pais[]>(`${url}`);
+    return this.http.get<Pais>(`${url}`);
   }
 
 }

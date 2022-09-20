@@ -19,7 +19,7 @@
         <label for="frontera" class="form-label">Frontera</label>
         <select id="frontera" formControlName="frontera" class="form-select">
             <option value="" selected>-Seleccionar-</option>
-            <option *ngFor="let pais of paises" [value]="pais.alpha3Code">{{ pais.name }}</option>
+            <option *ngFor="let frontera of fronteras" [value]="frontera">{{ frontera }}</option>
         </select>
     </div>
     <div class="d-flex justify-content-end">
